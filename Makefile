@@ -1,8 +1,20 @@
-proc_fan: main.o
-	cc -o proc_fan main.o
+main: main.o
+	cc -o main main.o
+	
+palin: palindrome.o
+	cc -o palin palindrome.o
+	
+trial: trial.o
+	cc -o trial trial.o
 
 main.o: main.c
 	cc -c main.c
+
+palindrome.o: palindrome.c
+	cc -c palindrome.c
+	
+trial.o: trial.c
+	cc -c trial.c
   
 clean :
-	rm proc_fan main.o
+	rm main palin trial main.o palindrome.o trial.o
