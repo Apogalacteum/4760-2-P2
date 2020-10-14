@@ -20,10 +20,8 @@
 
 int main()
 {
-  char * test_string = "eatmypants";
+  char * test_string = "tacocat";
   int length = strlen(test_string);
-  
-  printf("%d\n", length);
   
   int i = 0;
   int pal_flag = 1;
@@ -36,7 +34,7 @@ int main()
     }
     else
       printf("match! %c v %c\n", test_string[i], test_string[length-(i+1)]);
-  }
+  }//end of for loop
   if( pal_flag == 1 ) printf("palindrome!\n");
   else printf("not palindrome!\n");
   

@@ -19,10 +19,11 @@ int main(int argc, char* argv[])
   int child_total_max = 4;
   int child_concurrent_max = 2;
   int countdown = 100;
+  
   //processes command line arguments
+  //options are -h, -n x, -s x, -t x
   while((opt = getopt(argc, argv, ":hn:s:t:")) != -1)
   {
-  
     switch(opt)
     {
       case 'h':
@@ -70,6 +71,7 @@ int main(int argc, char* argv[])
     
   }//end of while loop
   
+  //catches extra arguments (should be infile)
   for(; optind < argc; optind++)
   { 
     char * test_str_file = "bb.bb";

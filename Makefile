@@ -1,5 +1,5 @@
-main: main.o
-	cc -o main main.o
+master: main.o
+	cc -o master main.o
 	
 palin: palindrome.o
 	cc -o palin palindrome.o
@@ -17,4 +17,4 @@ trial.o: trial.c
 	cc -c trial.c
   
 clean :
-	rm main palin trial main.o palindrome.o trial.o
+	rm master palin trial main.o palindrome.o trial.o

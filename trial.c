@@ -1,3 +1,5 @@
+//placeholder copy of periodicasterisk.c in book
+
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
