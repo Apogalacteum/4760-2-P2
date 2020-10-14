@@ -16,6 +16,9 @@
 int main(int argc, char* argv[])
 {
   int opt;
+  int child_total_max = 4;
+  int child_concurrent_max = 2;
+  int countdown = 100;
   //processes command line arguments
   while((opt = getopt(argc, argv, ":hn:s:t:")) != -1)
   {
@@ -23,20 +26,35 @@ int main(int argc, char* argv[])
     switch(opt)
     {
       case 'h':
-        //pr_limit = atoi(optarg);
-        printf("called with h option\n");
+        printf("Usage:\n");
+        printf("master [-n x] [-s x] [-t time] infile\n");
+        printf("\t-n x\tIndicate the maximum total of child processes master will ");
+        printf("\n\t\tever create. (Default 4)\n");
+        printf("\t-s x\tIndicate the number of children allowed to exist in the ");
+        printf("\n\t\tsystem at the same time. (Default 2)\n");
+        printf("\t-t time\tThe time in seconds after which the process will ");
+        printf("\n\t\tterminate, even if it has not finished. (Default 100)\n");
+        printf("\tinfile\tInput file containing strings to be tested.\n");
         break;
       case 'n':
-        //pr_limit = atoi(optarg);
-        printf("called with n option\n");
+        child_total_max = atoi(optarg);
+        printf("called with n option %d value\n", child_total_max);
         break;
       case 's':
-        //pr_limit = atoi(optarg);
-        printf("called with s option\n");
+        child_concurrent_max = atoi(optarg);
+        if(child_concurrent_max >= 20)
+        {
+          printf("no more than 19 children may exist at once\n");
+          printf("you attempted %d\n", child_concurrent_max);
+          child_concurrent_max = 19;
+          printf("value has been defaulted to %d...\n", child_concurrent_max);
+        }
+        else
+          printf("called with s option %d value\n", child_concurrent_max);
         break;
       case 't':
-        //pr_limit = atoi(optarg);
-        printf("called with t option\n");
+        countdown = atoi(optarg);
+        printf("called with t option %d value\n", countdown);
         break;
       case ':':
         fprintf(stderr, "option needs a value\n");
@@ -44,17 +62,20 @@ int main(int argc, char* argv[])
         return(-1);
         break;
       case'?':
-        fprintf(stderr, "unknown option: %s\n", opt);
+        printf("unknown option\n");
         perror("ERROR: ");
         return(-1);
         break;
     }//end of switch
     
-    for(; optind < argc; optind++)
-		{      
-      printf("extra arguments: %s\n", argv[optind]);  
-    }//end of for L2
-    
   }//end of while loop
-   return 0;
+  
+  for(; optind < argc; optind++)
+  { 
+    char * test_str_file = "bb.bb";
+    test_str_file = argv[optind];     
+    printf("extra arguments: %s\n", test_str_file);  
+  }//end of for loop
+  
+  return 0;
 }//end of main
